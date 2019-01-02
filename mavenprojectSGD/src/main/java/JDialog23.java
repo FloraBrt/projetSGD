@@ -20,8 +20,13 @@ public class JDialog23 extends javax.swing.JDialog {
      */
     public JDialog23(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
+    }
+    
+    public JDialog23(java.awt.Frame parent, boolean modal,String jeu) {
+        super(parent, modal);
         parent1 = (JFrame) parent;
-        this.setTitle("Fiche technique");
+        this.setTitle("Fiche technique : " + jeu);
         initComponents();
     }
 
