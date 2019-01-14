@@ -4,6 +4,9 @@ package Interface;
 import javax.swing.JFrame;
 import java.util.*;
 import java.util.Map.Entry;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import projetsgd.Connexion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,21 +37,21 @@ public class JDialog22 extends javax.swing.JDialog {
     
     private Map<String,String> resume(){
         Map<String,String> res= new HashMap();
-        if(Annee.getText()!="")
+        if(!Annee.getText().equals(""))
             res.put("Annee",Annee.getText());
-        if(_id.getText()!="")
+        if(!_id.getText().equals(""))
             res.put("_id",_id.getText());
-        if(Editeur.getText()!="")
+        if(!Editeur.getText().equals(""))
             res.put("Editeur",Editeur.getText());
-        if(Genre.getText()!="")
+        if(!Genre.getText().equals(""))
             res.put("Genre",Genre.getText());
-        if(Langue.getText()!="")
+        if(!Langue.getText().equals(""))
             res.put("Langue",Langue.getText());
-        if(PEGI.getText()!="")
+        if(!PEGI.getText().equals(""))
             res.put("PEGI",PEGI.getText());
-        if(PateForme.getText()!="")
-            res.put("Pate-Forme",PateForme.getText());
-        if(Serie.getText()!="")
+        if(!PateForme.getText().equals(""))
+            res.put("Pate-forme",PateForme.getText());
+        if(!Serie.getText().equals(""))
             res.put("Serie",Serie.getText());
         return res;
     }
@@ -330,23 +333,25 @@ public class JDialog22 extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        jList1.removeAll();
         Map<String,String> l=this.resume();
-        int length=l.size();
         String table;
+        List<String> res=new ArrayList<String>();
         if(jRadioButton3.isSelected()){
             table="Jeux";
         }
         else{
             table="Serie";
         }
-        Set<Entry<String, String>> setL = l.entrySet();
-        Iterator<Entry<String, String>> it = setL.iterator();
-        while(it.hasNext()){
-           Entry<String, String> e = it.next();
-           System.out.println(e.getKey() + " : " + e.getValue());
+        Connexion mongo=new Connexion(table);
+        res=mongo.requete(l);
+        DefaultListModel listModel = new DefaultListModel();
+        for(String s : res){
+            listModel.addElement(s);
         }
-        this.setVisible(false);
-        new JDialog22 (parent1, false,user).setVisible(true);
+        jList1=new JList(listModel);
+        jScrollPane1.setViewportView(jList1);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
