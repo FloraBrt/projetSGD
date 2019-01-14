@@ -20,12 +20,13 @@ public class JDialog23 extends javax.swing.JDialog {
     /**
      * Creates new form JDialog23
      */
-    public JDialog23(java.awt.Frame parent, boolean modal) {
+    public JDialog23(java.awt.Frame parent, boolean modal, String user) {
         super(parent, modal);
+        this.user=user;
         initComponents();
     }
     
-    public JDialog23(java.awt.Frame parent, boolean modal,String jeu) {
+    public JDialog23(java.awt.Frame parent, boolean modal, String user, String jeu) {
         super(parent, modal);
         parent1 = (JFrame) parent;
         this.setTitle("Fiche technique : " + jeu);
@@ -277,7 +278,7 @@ public class JDialog23 extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new JDialog22 (parent1, false).setVisible(true);
+        new JDialog22 (parent1, false, user).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -314,7 +315,7 @@ public class JDialog23 extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialog23 dialog = new JDialog23(new javax.swing.JFrame(), true);
+                JDialog23 dialog = new JDialog23(new javax.swing.JFrame(), true, "plop");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -359,4 +360,5 @@ public class JDialog23 extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+    private String user;
 }

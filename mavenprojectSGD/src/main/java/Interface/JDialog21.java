@@ -108,7 +108,7 @@ public class JDialog21 extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new JDialog22 (parent1, false).setVisible(true);
+        new JDialog22 (parent1, false,jTextField1.getText()).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 
 /**
  *
- * @author florab
+ * @author gd238947
  */
 public class Connexion {
     
@@ -32,10 +32,15 @@ public class Connexion {
     MongoCredential credential = MongoCredential.createCredential("gd238947", "gd238947", pass);
     MongoClient client = new MongoClient(new ServerAddress("mongo", 27017), Arrays.asList(credential));
     MongoDatabase db = client.getDatabase("gd238947");
+    MongoCollection<Document> collection;
     // Liste des collections
     /*for (String name : db.listCollectionNames()) {
         System.out.println(name);
     }*/
-    MongoCollection<Document> collection = db.getCollection("Jeux");
+    public Connexion(String str){
+        collection = db.getCollection(str);
+    }
+    
+    
     
 }

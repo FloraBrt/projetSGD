@@ -2,6 +2,8 @@ package Interface;
 
 
 import javax.swing.JFrame;
+import java.util.*;
+import java.util.Map.Entry;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,6 +14,7 @@ import javax.swing.JFrame;
 /**
  *
  * @author FloraBrt
+ * @author gd238947
  */
 public class JDialog22 extends javax.swing.JDialog {
     
@@ -20,12 +23,34 @@ public class JDialog22 extends javax.swing.JDialog {
     /**
      * Creates new form JDialog22
      */
-    public JDialog22(java.awt.Frame parent, boolean modal) {
+    public JDialog22(java.awt.Frame parent, boolean modal,String user) {
         super(parent, modal);
         parent1 = (JFrame) parent;
+        this.user=user;
         this.setTitle("Recherche de jeu");
         initComponents();
        
+    }
+    
+    private Map<String,String> resume(){
+        Map<String,String> res= new HashMap();
+        if(Annee.getText()!="")
+            res.put("Annee",Annee.getText());
+        if(_id.getText()!="")
+            res.put("_id",_id.getText());
+        if(Editeur.getText()!="")
+            res.put("Editeur",Editeur.getText());
+        if(Genre.getText()!="")
+            res.put("Genre",Genre.getText());
+        if(Langue.getText()!="")
+            res.put("Langue",Langue.getText());
+        if(PEGI.getText()!="")
+            res.put("PEGI",PEGI.getText());
+        if(PateForme.getText()!="")
+            res.put("Pate-Forme",PateForme.getText());
+        if(Serie.getText()!="")
+            res.put("Serie",Serie.getText());
+        return res;
     }
 
     /**
@@ -53,21 +78,21 @@ public class JDialog22 extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        _id = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        Serie = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        Genre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        Annee = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        PateForme = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        Langue = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        Editeur = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        PEGI = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,10 +145,23 @@ public class JDialog22 extends javax.swing.JDialog {
         jLabel2.setText("Sur :");
 
         buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("Un jeu");
+        jRadioButton3.setSelected(true);
+        jRadioButton3.setToolTipText("Jeux");
+        jRadioButton3.setLabel("Un jeu");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton4);
         jRadioButton4.setText("Une série");
+        jRadioButton4.setToolTipText("Serie");
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Critères de recherche :");
 
@@ -165,35 +203,35 @@ public class JDialog22 extends javax.swing.JDialog {
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(63, 63, 63)
-                                    .addComponent(jTextField3))
+                                    .addComponent(Serie))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(63, 63, 63)
-                                    .addComponent(jTextField2))
+                                    .addComponent(_id))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(63, 63, 63)
-                                    .addComponent(jTextField4))
+                                    .addComponent(Genre))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(37, 37, 37)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField6)
-                                        .addComponent(jTextField5)))
+                                        .addComponent(PateForme)
+                                        .addComponent(Annee)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(37, 37, 37)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField7)
-                                        .addComponent(jTextField8)))
+                                        .addComponent(Langue)
+                                        .addComponent(Editeur)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(37, 37, 37)
-                                    .addComponent(jTextField9))
+                                    .addComponent(PEGI))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
@@ -230,39 +268,41 @@ public class JDialog22 extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2))
+                    .addComponent(_id))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3))
+                    .addComponent(Serie))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4))
+                    .addComponent(Genre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5)
+                    .addComponent(Annee)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6)
+                    .addComponent(PateForme)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7))
+                    .addComponent(Langue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8))
+                    .addComponent(Editeur))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9))
+                    .addComponent(PEGI))
                 .addGap(44, 44, 44)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
+
+        jRadioButton3.getAccessibleContext().setAccessibleName("Un jeu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -290,15 +330,59 @@ public class JDialog22 extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Map<String,String> l=this.resume();
+        int length=l.size();
+        String table;
+        if(jRadioButton3.isSelected()){
+            table="Jeux";
+        }
+        else{
+            table="Serie";
+        }
+        Set<Entry<String, String>> setL = l.entrySet();
+        Iterator<Entry<String, String>> it = setL.iterator();
+        while(it.hasNext()){
+           Entry<String, String> e = it.next();
+           System.out.println(e.getKey() + " : " + e.getValue());
+        }
         this.setVisible(false);
-        new JDialog22 (parent1, false).setVisible(true);
+        new JDialog22 (parent1, false,user).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String selectedL = jList1.getSelectedValue();
-        new JDialog23 (parent1, false,selectedL).setVisible(true);
+        new JDialog23 (parent1, false,user,selectedL).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        // TODO add your handling code here:
+        Annee.setEnabled(false);
+        Annee.setText("");
+        Editeur.setEnabled(false);
+        Editeur.setText("");
+        Genre.setEnabled(false);
+        Genre.setText("");
+        Langue.setEnabled(false);
+        Langue.setText("");
+        PEGI.setEnabled(false);
+        PEGI.setText("");
+        PateForme.setEnabled(false);
+        PateForme.setText("");
+        Serie.setEnabled(false);
+        Serie.setText("");
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+        Annee.setEnabled(true);
+        Editeur.setEnabled(true);
+        Genre.setEnabled(true);
+        Langue.setEnabled(true);
+        PEGI.setEnabled(true);
+        PateForme.setEnabled(true);
+        Serie.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,7 +414,7 @@ public class JDialog22 extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDialog22 dialog = new JDialog22(new javax.swing.JFrame(), true);
+                JDialog22 dialog = new JDialog22(new javax.swing.JFrame(), true,"plop");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -343,6 +427,14 @@ public class JDialog22 extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Annee;
+    private javax.swing.JTextField Editeur;
+    private javax.swing.JTextField Genre;
+    private javax.swing.JTextField Langue;
+    private javax.swing.JTextField PEGI;
+    private javax.swing.JTextField PateForme;
+    private javax.swing.JTextField Serie;
+    private javax.swing.JTextField _id;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
@@ -366,13 +458,6 @@ public class JDialog22 extends javax.swing.JDialog {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+    private String user;
 }
