@@ -38,24 +38,23 @@ public class Connexion {
     /*for (String name : db.listCollectionNames()) {
         System.out.println(name);
     }*/
+    
+    public MongoCollection<Document> getCollection(){
+        return this.collection;
+    }
+    
     public Connexion(String str){
         collection = db.getCollection(str);
     }
-    public List<String> requete(Map<String,String> map){
-        Block<Document> printBlock = new Block<Document>() {
-            @Override
-            public void apply(final Document document) {
-                System.out.println(document.toJson());
-            }
-        };
+    public List<String> requete(Map<String,Object> map){
+        
         List<String> res=new ArrayList<String>();
         int temp=map.size();
-        System.out.println(temp);
-        Set<Map.Entry<String, String>> setMap = map.entrySet();
-                Iterator<Map.Entry<String, String>> it = setMap.iterator();
+        Set<Map.Entry<String, Object>> setMap = map.entrySet();
+                Iterator<Map.Entry<String, Object>> it = setMap.iterator();
         switch (temp){
             case 1:{
-                Entry<String, String> e = it.next();
+                Entry<String, Object> e = it.next();
                 List<Document> jeux = (List<Document>) collection.find(eq(e.getKey(),e.getValue())).into(
 				new ArrayList<Document>());
 
@@ -67,8 +66,8 @@ public class Connexion {
                 break;
             }
             case 2:{
-                Entry<String, String> e = it.next();
-                Entry<String, String> f = it.next();
+                Entry<String, Object> e = it.next();
+                Entry<String, Object> f = it.next();
                 List<Document> jeux = (List<Document>) collection.find(and(eq(e.getKey(),e.getValue()),eq(f.getKey(),f.getValue()))).into(
 				new ArrayList<Document>());
 
@@ -80,9 +79,9 @@ public class Connexion {
                 break;
             }
             case 3:{
-                Entry<String, String> e = it.next();
-                Entry<String, String> f = it.next();
-                Entry<String, String> g = it.next();
+                Entry<String, Object> e = it.next();
+                Entry<String, Object> f = it.next();
+                Entry<String, Object> g = it.next();
                 List<Document> jeux = (List<Document>) collection.find(and(and(eq(e.getKey(),e.getValue()),eq(f.getKey(),f.getValue())),eq(g.getKey(),g.getValue()))).into(
 				new ArrayList<Document>());
 
@@ -94,10 +93,10 @@ public class Connexion {
                 break;            
             }
             case 4:{
-                Entry<String, String> e = it.next();
-                Entry<String, String> f = it.next();
-                Entry<String, String> g = it.next();
-                Entry<String, String> h = it.next();
+                Entry<String, Object> e = it.next();
+                Entry<String, Object> f = it.next();
+                Entry<String, Object> g = it.next();
+                Entry<String, Object> h = it.next();
                 List<Document> jeux = (List<Document>) collection.find(and(and(and(eq(e.getKey(),e.getValue()),eq(f.getKey(),f.getValue())),eq(g.getKey(),g.getValue())),eq(h.getKey(),h.getValue()))).into(
 				new ArrayList<Document>());
 
@@ -109,11 +108,11 @@ public class Connexion {
                 break;
             }
             case 5:{
-                Entry<String, String> e = it.next();
-                Entry<String, String> f = it.next();
-                Entry<String, String> g = it.next();
-                Entry<String, String> h = it.next();
-                Entry<String, String> i = it.next();
+                Entry<String, Object> e = it.next();
+                Entry<String, Object> f = it.next();
+                Entry<String, Object> g = it.next();
+                Entry<String, Object> h = it.next();
+                Entry<String, Object> i = it.next();
                 List<Document> jeux = (List<Document>) collection.find(and(and(and(and(eq(e.getKey(),e.getValue()),eq(f.getKey(),f.getValue())),eq(g.getKey(),g.getValue())),eq(h.getKey(),h.getValue())),eq(i.getKey(),i.getValue()))).into(
 				new ArrayList<Document>());
 
@@ -125,12 +124,12 @@ public class Connexion {
                 break;
             }
             case 6:{
-                Entry<String, String> e = it.next();
-                Entry<String, String> f = it.next();
-                Entry<String, String> g = it.next();
-                Entry<String, String> h = it.next();
-                Entry<String, String> i = it.next();
-                Entry<String, String> j = it.next();
+                Entry<String, Object> e = it.next();
+                Entry<String, Object> f = it.next();
+                Entry<String, Object> g = it.next();
+                Entry<String, Object> h = it.next();
+                Entry<String, Object> i = it.next();
+                Entry<String, Object> j = it.next();
                 List<Document> jeux = (List<Document>) collection.find(and(and(and(and(and(eq(e.getKey(),e.getValue()),eq(f.getKey(),f.getValue())),eq(g.getKey(),g.getValue())),eq(h.getKey(),h.getValue())),eq(i.getKey(),i.getValue())),eq(j.getKey(),j.getValue()))).into(
 				new ArrayList<Document>());
 
@@ -142,13 +141,13 @@ public class Connexion {
                 break;
             }
             case 7:{
-                Entry<String, String> e = it.next();
-                Entry<String, String> f = it.next();
-                Entry<String, String> g = it.next();
-                Entry<String, String> h = it.next();
-                Entry<String, String> i = it.next();
-                Entry<String, String> j = it.next();
-                Entry<String, String> k = it.next();
+                Entry<String, Object> e = it.next();
+                Entry<String, Object> f = it.next();
+                Entry<String, Object> g = it.next();
+                Entry<String, Object> h = it.next();
+                Entry<String, Object> i = it.next();
+                Entry<String, Object> j = it.next();
+                Entry<String, Object> k = it.next();
                 List<Document> jeux = (List<Document>) collection.find(and(and(and(and(and(and(eq(e.getKey(),e.getValue()),eq(f.getKey(),f.getValue())),eq(g.getKey(),g.getValue())),eq(h.getKey(),h.getValue())),eq(i.getKey(),i.getValue())),eq(j.getKey(),j.getValue())),eq(k.getKey(),k.getValue()))).into(
 				new ArrayList<Document>());
 
@@ -160,14 +159,14 @@ public class Connexion {
                 break;
             }
             case 8:{
-                Entry<String, String> e = it.next();
-                Entry<String, String> f = it.next();
-                Entry<String, String> g = it.next();
-                Entry<String, String> h = it.next();
-                Entry<String, String> i = it.next();
-                Entry<String, String> j = it.next();
-                Entry<String, String> k = it.next();
-                Entry<String, String> l = it.next();
+                Entry<String, Object> e = it.next();
+                Entry<String, Object> f = it.next();
+                Entry<String, Object> g = it.next();
+                Entry<String, Object> h = it.next();
+                Entry<String, Object> i = it.next();
+                Entry<String, Object> j = it.next();
+                Entry<String, Object> k = it.next();
+                Entry<String, Object> l = it.next();
                 List<Document> jeux = (List<Document>)collection.find(and(and(and(and(and(and(and(eq(e.getKey(),e.getValue()),eq(f.getKey(),f.getValue())),eq(g.getKey(),g.getValue())),eq(h.getKey(),h.getValue())),eq(i.getKey(),i.getValue())),eq(j.getKey(),j.getValue())),eq(k.getKey(),k.getValue())),eq(l.getKey(),l.getValue()))).into(
 				new ArrayList<Document>());
 
@@ -190,10 +189,37 @@ public class Connexion {
                 break;
             }
         }
-        
         return res;
     }
     
+    public Document resultat(String id){
+        
+        List<Document> temp = (List<Document>) collection.find(eq("_id",id)).into(
+				new ArrayList<Document>());
+        Document res=temp.get(0);
+        
+        return res;
+        
+    }
+    public void insert(Map<String,Object> map){
+        Document d1=new Document();
+        Set<Entry<String, Object>> setMap = map.entrySet();
+        Iterator<Entry<String, Object>> it = setMap.iterator();
+        while(it.hasNext()){
+            Entry<String, Object> e = it.next();
+            d1.append(e.getKey() , e.getValue());
+        }
+        collection.insertOne(d1);
+    }
     
+    public void update(String id,Map<String,Object> map){
+        Document d1=new Document();
+        Set<Entry<String, Object>> setMap = map.entrySet();
+        Iterator<Entry<String, Object>> it = setMap.iterator();
+        while(it.hasNext()){
+            Entry<String, Object> e = it.next();
+            collection.updateOne(eq("_id",id),set(e.getKey(),e.getValue()));
+        }
+    }
     
 }

@@ -1,9 +1,9 @@
 package Interface;
 
 
+import static java.lang.Integer.parseInt;
 import javax.swing.JFrame;
 import java.util.*;
-import java.util.Map.Entry;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import projetsgd.Connexion;
@@ -35,10 +35,10 @@ public class JDialog22 extends javax.swing.JDialog {
        
     }
     
-    private Map<String,String> resume(){
-        Map<String,String> res= new HashMap();
+    private Map<String,Object> resume(){
+        Map<String,Object> res= new HashMap();
         if(!Annee.getText().equals(""))
-            res.put("Annee",Annee.getText());
+            res.put("Annee",parseInt(Annee.getText()));
         if(!_id.getText().equals(""))
             res.put("_id",_id.getText());
         if(!Editeur.getText().equals(""))
@@ -48,7 +48,7 @@ public class JDialog22 extends javax.swing.JDialog {
         if(!Langue.getText().equals(""))
             res.put("Langue",Langue.getText());
         if(!PEGI.getText().equals(""))
-            res.put("PEGI",PEGI.getText());
+            res.put("PEGI",parseInt(PEGI.getText()));
         if(!PateForme.getText().equals(""))
             res.put("Pate-forme",PateForme.getText());
         if(!Serie.getText().equals(""))
@@ -72,9 +72,6 @@ public class JDialog22 extends javax.swing.JDialog {
         jList1 = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
@@ -99,11 +96,6 @@ public class JDialog22 extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
@@ -137,15 +129,7 @@ public class JDialog22 extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Vous désirez :");
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Louer");
-
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Des informations");
-
-        jLabel2.setText("Sur :");
+        jLabel2.setText("Vous Cherchez :");
 
         buttonGroup2.add(jRadioButton3);
         jRadioButton3.setSelected(true);
@@ -201,12 +185,16 @@ public class JDialog22 extends javax.swing.JDialog {
                         .addGap(153, 153, 153)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(63, 63, 63)
-                                    .addComponent(Serie))
+                                    .addComponent(Serie, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(63, 63, 63)
@@ -234,18 +222,9 @@ public class JDialog22 extends javax.swing.JDialog {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(37, 37, 37)
-                                    .addComponent(PEGI))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jRadioButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(PEGI)))
                             .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel2))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -253,20 +232,15 @@ public class JDialog22 extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jRadioButton3))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton2)
-                        .addGap(41, 41, 41)
+                        .addGap(23, 23, 23)
                         .addComponent(jRadioButton4)))
-                .addGap(40, 40, 40)
+                .addGap(98, 98, 98)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -305,8 +279,6 @@ public class JDialog22 extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jRadioButton3.getAccessibleContext().setAccessibleName("Un jeu");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -331,11 +303,16 @@ public class JDialog22 extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String selectedL = jList1.getSelectedValue();
+        new JDialog23 (parent1, false,user,selectedL,table).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         jList1.removeAll();
-        Map<String,String> l=this.resume();
-        String table;
+        Map<String,Object> l=this.resume();
         List<String> res=new ArrayList<String>();
         if(jRadioButton3.isSelected()){
             table="Jeux";
@@ -351,14 +328,8 @@ public class JDialog22 extends javax.swing.JDialog {
         }
         jList1=new JList(listModel);
         jScrollPane1.setViewportView(jList1);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String selectedL = jList1.getSelectedValue();
-        new JDialog23 (parent1, false,user,selectedL).setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         // TODO add your handling code here:
@@ -444,7 +415,6 @@ public class JDialog22 extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -458,11 +428,10 @@ public class JDialog22 extends javax.swing.JDialog {
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
     private String user;
+    private String table="Jeux";
 }

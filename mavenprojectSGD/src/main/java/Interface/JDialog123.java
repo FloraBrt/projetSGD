@@ -1,7 +1,16 @@
 package Interface;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JList;
+import projetsgd.Connexion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,6 +25,7 @@ import javax.swing.JFrame;
 public class JDialog123 extends javax.swing.JDialog {
     
     JFrame parent1;
+    private Connexion series;
 
     /**
      * Creates new form JDialog123
@@ -25,6 +35,19 @@ public class JDialog123 extends javax.swing.JDialog {
         parent1 = (JFrame) parent;
         this.setTitle("Description d'une série");
         initComponents();
+        series = new Connexion("Serie");
+        Map<String,Object> l=new HashMap();        
+        List<String> res=new ArrayList<String>();
+        res=series.requete(l);
+        DefaultComboBoxModel boxModel = new DefaultComboBoxModel();
+        boxModel.addElement("Séries existantes");
+        for(String s : res){
+            boxModel.addElement(s);
+        }        
+        jComboBox1.setModel(boxModel);
+        jButton2.setEnabled(false);        
+        jTextArea1.setEnabled(false);
+        jTextArea1.setLineWrap(true);        
     }
 
     /**
@@ -41,7 +64,8 @@ public class JDialog123 extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,10 +77,26 @@ public class JDialog123 extends javax.swing.JDialog {
         });
 
         jButton2.setText("Valider");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Séries existantes", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Séries existantes" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Description :");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,10 +105,10 @@ public class JDialog123 extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 175, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -89,8 +129,8 @@ public class JDialog123 extends javax.swing.JDialog {
                 .addGap(61, 61, 61)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -127,6 +167,29 @@ public class JDialog123 extends javax.swing.JDialog {
         this.setVisible(false);
         new JDialog11 (parent1, false).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        int select=jComboBox1.getSelectedIndex();
+        if(select==0){
+            jButton2.setEnabled(false);
+            jTextArea1.setEnabled(false);
+            jTextArea1.setText("");
+        }
+        else{
+            jButton2.setEnabled(true);
+            jTextArea1.setEnabled(true);
+            jTextArea1.setEditable(true);
+            jTextArea1.setText(series.resultat(jComboBox1.getItemAt(select)).getString("Description"));
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Map<String,Object> map= new HashMap();
+        map.put("Description", jTextArea1.getText());
+        series.update(jComboBox1.getItemAt(jComboBox1.getSelectedIndex()),map);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,6 +239,7 @@ public class JDialog123 extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
