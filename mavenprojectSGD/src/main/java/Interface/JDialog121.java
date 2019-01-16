@@ -5,6 +5,7 @@ import static java.lang.Integer.parseInt;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
+import projetsgd.Connexion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -42,8 +43,8 @@ public class JDialog121 extends javax.swing.JDialog {
             res.put("Genre",Genre.getText());
         if(!Langue.getText().equals(""))
             res.put("Langue",Langue.getText());
-        if(!Langue.getText().equals(""))
-            res.put("PEGI",parseInt(Langue.getText()));
+        if(!PEGI.getText().equals(""))
+            res.put("PEGI",parseInt(PEGI.getText()));
         if(!PateForme.getText().equals(""))
             res.put("Pate-forme",PateForme.getText());
         if(!Serie.getText().equals(""))
@@ -82,7 +83,8 @@ public class JDialog121 extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         PEGI = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        Synopsis = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Synopsis = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,6 +96,11 @@ public class JDialog121 extends javax.swing.JDialog {
         });
 
         jButton2.setText("Valider");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Titre : ");
 
@@ -112,6 +119,12 @@ public class JDialog121 extends javax.swing.JDialog {
         jLabel8.setText("PEGI : ");
 
         jLabel9.setText("Synopsis : ");
+
+        Synopsis.setColumns(20);
+        Synopsis.setLineWrap(true);
+        Synopsis.setRows(5);
+        Synopsis.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(Synopsis);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,20 +158,20 @@ public class JDialog121 extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Langue)
                     .addComponent(Editeur)))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(PEGI))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(Synopsis))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PEGI)
+                    .addComponent(jScrollPane1)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,9 +210,7 @@ public class JDialog121 extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(Synopsis, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -232,47 +243,18 @@ public class JDialog121 extends javax.swing.JDialog {
         new JDialog11 (parent1, false).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDialog121.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDialog121.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDialog121.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDialog121.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Connexion jeux = new Connexion("Jeux");
+        Connexion serie = new Connexion("Serie");
+        if(serie.resultat(Serie.getText())==null){
+            Map< String, Object> map = new HashMap();
+            map.put("_id",Serie.getText());
+            serie.insert(map);
+        }            
+        jeux.insert(resume());
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JDialog121 dialog = new JDialog121(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Annee;
@@ -282,7 +264,7 @@ public class JDialog121 extends javax.swing.JDialog {
     private javax.swing.JTextField PEGI;
     private javax.swing.JTextField PateForme;
     private javax.swing.JTextField Serie;
-    private javax.swing.JTextField Synopsis;
+    private javax.swing.JTextArea Synopsis;
     private javax.swing.JTextField _id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -296,5 +278,6 @@ public class JDialog121 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

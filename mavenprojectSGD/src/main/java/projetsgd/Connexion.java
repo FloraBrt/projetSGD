@@ -6,6 +6,10 @@
 package projetsgd;
 
 import com.mongodb.Block;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.MapReduceCommand;
+import com.mongodb.MapReduceOutput;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -196,7 +200,9 @@ public class Connexion {
         
         List<Document> temp = (List<Document>) collection.find(eq("_id",id)).into(
 				new ArrayList<Document>());
-        Document res=temp.get(0);
+        Document res=null;
+        if(temp.size()>0)
+            res=temp.get(0);
         
         return res;
         
@@ -213,7 +219,6 @@ public class Connexion {
     }
     
     public void update(String id,Map<String,Object> map){
-        Document d1=new Document();
         Set<Entry<String, Object>> setMap = map.entrySet();
         Iterator<Entry<String, Object>> it = setMap.iterator();
         while(it.hasNext()){
@@ -221,5 +226,55 @@ public class Connexion {
             collection.updateOne(eq("_id",id),set(e.getKey(),e.getValue()));
         }
     }
-    
+    public Map<String,Map<String,Double>> mapReduce(){
+        // get the Avis collection
+        DBCollection coll=client.getDB("gd238947").getCollection("Avis");
+        // map function pour catégoriser les Notes par jeu
+        String noteMap = "function (){" + "var criteria;"
+                        + "{" + "criteria = this.Sujet;"
+                        + "emit(criteria,this.Note);" + "}" + "};";
+
+        // reduce function pour ajouter toutes les Notes et calculer la Note moyenne
+
+        String noteReduce = "function(key, Note) {" + "var total =0;"
+                        + "for (var i = 0; i < Note.length; i++) {"
+                        + "total = total+Note[i];" + "}"
+                        + "return total/Note.length;" + "};";
+
+        // create the mapreduce command by calling map and reduce functions
+        MapReduceCommand mapcmd = new MapReduceCommand(coll, noteMap, noteReduce,
+                        null, MapReduceCommand.OutputType.INLINE, null);
+
+        // invoke the mapreduce command
+        MapReduceOutput notes = coll.mapReduce(mapcmd);
+
+        // print the average Note of cars
+        double min = 11;
+        double max = -1;
+        String minTitre="";
+        String maxTitre="";
+
+        for (DBObject o : notes.results()) {
+
+                o.toMap();
+                double value = (double) o.get("value");
+                if(value>max){
+                    max=value;
+                    maxTitre=(String)o.get("_id");
+                }
+                if(value<min){
+                    min=value;
+                    minTitre=(String)o.get("_id");
+                }   
+        }
+        Map<String,Double> minMap=new HashMap();
+        minMap.put(minTitre,min);
+        Map<String,Double> maxMap=new HashMap();
+        maxMap.put(maxTitre,max);
+        Map<String,Map<String,Double>> res=new HashMap();
+        res.put("min",minMap);
+        res.put("max",maxMap);
+        return res;
+    }
+        
 }
